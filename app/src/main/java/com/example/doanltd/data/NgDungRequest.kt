@@ -32,7 +32,7 @@ data class LoginReponse(
 data class HoaDonRequest(
     @SerializedName("MaNgD") val MaNgD: String,
     @SerializedName("TongTien") val TongTien: Double,
-    @SerializedName("DiaChi") val DiaChi: String)
+)
 
 data class HoaDonReponse(
     val success:Boolean,

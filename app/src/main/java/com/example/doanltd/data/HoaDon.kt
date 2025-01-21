@@ -5,5 +5,4 @@ data class HoaDon (
     val MaNgD:String,
     val TongTien:Double,
     val TrangThai:String,
-    val DiaChi:String
 )

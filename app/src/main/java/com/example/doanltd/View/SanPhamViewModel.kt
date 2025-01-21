@@ -141,9 +141,9 @@ class SanPhamViewModel :ViewModel(){
     val MaHd: StateFlow<String?> = _MaHd
 
 
-    suspend fun themhoadon(MaNgD:String,TongTien:Double,DiaChi:String) {
+    suspend fun themhoadon(MaNgD:String,TongTien:Double) {
         try {
-            val response = RetrofitInstance.api.themhoadon(HoaDonRequest(MaNgD,TongTien,DiaChi))
+            val response = RetrofitInstance.api.themhoadon(HoaDonRequest(MaNgD,TongTien))
             _hoadonthanhcong.value = response.success
             _hoadonthongbao.value = response.message
             _MaHd.value = response.MaHD

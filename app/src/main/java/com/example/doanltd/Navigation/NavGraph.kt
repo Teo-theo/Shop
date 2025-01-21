@@ -35,6 +35,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 sealed class Screen(val route: String) {
     object Login : Screen("login")
+    object LoginCustomer : Screen("logincustomer")
     object Register : Screen("register")
     object Home : Screen("home")
     object Profile : Screen("profile")
@@ -103,6 +104,9 @@ fun AuthNavigation() {
     NavHost(navController = navController, startDestination = Screen.Login.route) {
         composable(Screen.Login.route) {
             LoginScreen(navController = navController)
+        }
+        composable(Screen.LoginCustomer.route) {
+            Customer_Login_Screen(navController = navController)
         }
         composable(Screen.Register.route) {
             RegisterScreen(navController = navController)

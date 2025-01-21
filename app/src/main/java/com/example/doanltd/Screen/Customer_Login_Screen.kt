@@ -38,7 +38,7 @@ import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(navController: NavController,viewModel: AuthViewModel= androidx.lifecycle.viewmodel.compose.viewModel()) {
+fun Customer_Login_Screen(navController: NavController,viewModel: AuthViewModel= androidx.lifecycle.viewmodel.compose.viewModel()) {
     var TKNgD by remember { mutableStateOf("") }
     var MatKhauNgD by remember { mutableStateOf("") }
 
@@ -60,106 +60,103 @@ fun LoginScreen(navController: NavController,viewModel: AuthViewModel= androidx.
             modifier = Modifier.matchParentSize()
         )
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            modifier = Modifier.padding(bottom = 30.dp),
-            text = "ĐĂNG NHẬP",
-            fontSize = 40.sp,
-            fontWeight = FontWeight.ExtraBold,
-            color = Color.Black
-        )
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.Bottom
-        ) {
-            Button(
-                modifier = Modifier.padding(horizontal = 10.dp),
-                colors = ButtonDefaults.buttonColors(Color.Yellow),
-                onClick = {
-                    navController.navigate("login")
-                },
-            ) {
-                Text(text = "Quản lý", color = Color.Black)
-            }
-            Button(
-                colors = ButtonDefaults.buttonColors(Color.LightGray),
-                onClick = {
-                    navController.navigate(Screen.LoginCustomer.route)
-                }
-            ) {
-                Text(text = "Khách hàng", color = Color.Black)
-            }
-        }
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
+                .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-
-            OutlinedTextField(
-                value = TKNgD,
-                onValueChange = { TKNgD = it },
-                label = { Text("Tên đăng nhập") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                shape = RoundedCornerShape(20.dp),
+            Text(
+                modifier = Modifier.padding(bottom = 30.dp),
+                text = "ĐĂNG NHẬP",
+                fontSize = 40.sp,
+                fontWeight = FontWeight.ExtraBold,
+                color = Color.Black
             )
-
-            OutlinedTextField(
-                value = MatKhauNgD,
-                onValueChange = { MatKhauNgD = it },
-                label = { Text("Password") },
-                visualTransformation = PasswordVisualTransformation(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                shape = RoundedCornerShape(20.dp),
-            )
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
+                horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.Bottom
             ) {
                 Button(
-                    onClick = { /*CoroutineScope(Dispatchers.IO).launch {
+                    modifier = Modifier.padding(horizontal = 10.dp),
+                    colors = ButtonDefaults.buttonColors(Color.LightGray),
+                    onClick = {},
+                ) {
+                    Text(text = "Quản lý", color = Color.Black)
+                }
+                Button(
+                    colors = ButtonDefaults.buttonColors(Color.Yellow),
+                    onClick = {
+                        navController.navigate("logincustomer")
+                    }
+                ) {
+                    Text(text = "Khách hàng", color = Color.Black)
+                }
+            }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+
+                OutlinedTextField(
+                    value = TKNgD,
+                    onValueChange = { TKNgD = it },
+                    label = { Text("Tên đăng nhập") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    shape = RoundedCornerShape(20.dp),
+                )
+
+                OutlinedTextField(
+                    value = MatKhauNgD,
+                    onValueChange = { MatKhauNgD = it },
+                    label = { Text("Password") },
+                    visualTransformation = PasswordVisualTransformation(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    shape = RoundedCornerShape(20.dp),
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.Bottom
+                ) {
+                    Button(
+                        onClick = { /*CoroutineScope(Dispatchers.IO).launch {
                     viewModel.dangNhapNguoiDung(
                         tkNgD = TKNgD,
                         matKhauNgD = MatKhauNgD
                     )
                 }*/
-                        navController.navigate(Screen.Admin.route)
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 16.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE7A953)),
-                    shape = RoundedCornerShape(20.dp)
-                ) {
-                    Text("ĐĂNG NHẬP", color = Color.White)
-                }
-                Button(
-                    onClick = {
-                        navController.navigate("register")
-                    },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE7A953)),
-                    shape = RoundedCornerShape(20.dp)
-                ) {
-                    Text(text = "Đăng ký", color = Color.Black)
+                            navController.navigate(Screen.Home.route)
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 16.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE7A953)),
+                        shape = RoundedCornerShape(20.dp)
+                    ) {
+                        Text("ĐĂNG NHẬP", color = Color.White)
+                    }
+                    Button(
+                        colors = ButtonDefaults.buttonColors(Orange),
+                        onClick = {
+                            navController.navigate("register")
+                        }
+                    ) {
+                        Text(text = "Đăng ký", color = Color.Black)
+                    }
                 }
             }
         }
-    }
     }
     // ⬇️ Đặt LaunchedEffect bên ngoài Column ⬇️
     LaunchedEffect(dangNhapThanhCong) {

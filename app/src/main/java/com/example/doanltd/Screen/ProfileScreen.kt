@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doanltd.AppDatabase
 import com.example.doanltd.Navigation.Screen
@@ -33,7 +34,7 @@ fun ProfileScreen(navController: NavController) {
     var user by remember { mutableStateOf<NgDungEntity?>(null) }
     val context = LocalContext.current
     val db = AppDatabase.getDatabase(context).ngDungDao()
-
+    val Orange = Color(0xFFE7A953)
     LaunchedEffect(Unit) {
         // Di chuyển việc truy vấn vào coroutine
         CoroutineScope(Dispatchers.IO).launch {
@@ -48,7 +49,30 @@ fun ProfileScreen(navController: NavController) {
 
     Scaffold(
         bottomBar = {
-            NavigationBar {
+            NavigationBar(
+                containerColor = Orange
+            ) {
+                NavigationBarItem(
+                    icon = { Icon(Icons.Default.ShoppingCart, contentDescription = "Cart") },
+                    label = { Text("Cart") },
+                    selected = false,
+                    onClick = {
+                        navController.navigate(Screen.Cart.route)
+                    }
+                )
+                NavigationBarItem(
+                    icon = {
+                        Icon(
+                            painter = painterResource(id = R.drawable.history),
+                            modifier = Modifier.size(30.dp), contentDescription = "History"
+                        )
+                    },
+                    label = { Text("History") },
+                    selected = false,
+                    onClick = {
+                        navController.navigate(Screen.OrderHistory.route)
+                    }
+                )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
                     label = { Text("Home") },
@@ -58,41 +82,21 @@ fun ProfileScreen(navController: NavController) {
                     }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Email, contentDescription = "Tin Nhắn") },
-                    label = { Text("Tin nhắn") },
-                    selected = false,
-                    onClick = {navController.navigate(Screen.Message.route) }
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.ShoppingCart, contentDescription = "Giỏ Hàng") },
-                    label = { Text("Giỏ Hàng") },
-                    selected = false,
-                    onClick = { navController.navigate(Screen.Cart.route)}
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Thông Tin") },
-                    label = { Text("Thông Tin") },
+                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
+                    label = { Text("Profile") },
                     selected = true,
                     onClick = {
-
                         navController.navigate(Screen.Profile.route)
                     }
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Settings, contentDescription = "Cài Đặt") },
-                    label = { Text("Cài Đặt") },
-                    selected = false,
-                    onClick = { navController.navigate(Screen.Setting.route)}
                 )
             }
         }
     ) { paddingValues ->
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxWidth()
+                .padding(paddingValues),
+            horizontalAlignment = Alignment.Start
         ) {
             // Profile Image
             Box(
@@ -100,77 +104,38 @@ fun ProfileScreen(navController: NavController) {
                     .size(80.dp)
                     .clip(CircleShape)
                     .background(Color.LightGray)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.logo),
-                    contentDescription = "Profile Picture",
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
+                    .align(Alignment.CenterHorizontally)
+            )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
+            // Customer Information
             Text(
-                "User Profile",
-                style = MaterialTheme.typography.titleMedium,
+                text = "VÕ THÀNH PHUONG",
+                fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
 
-            Text(
-                "Come and bring me :)",
-                style = MaterialTheme.typography.bodyMedium,
-                color = Color.Gray
-            )
+            Spacer(modifier = Modifier.height(16.dp))
 
+            Text(text = "Thông tin khách hàng:", fontWeight = FontWeight.Medium)
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            user?.SDT?.let { Text(text = it) }
+            user?.Email?.let { Text(text = it) }
+            user?.TenNgD?.let { Text(text = it) }
             Spacer(modifier = Modifier.height(24.dp))
-
-            // Information Section
-            ProfileSection(
-                title = "Thông tin liên hệ",
-                content = "${user?.Email}",
-                onClick = { }
-            )
-
-            ProfileSection(
-                title = "Số điện thoại",
-                content = "${user?.SDT}",
-                onClick = { }
-            )
-
-            ProfileSection(
-                title = "Họ và tên",
-                content = "${user?.TenNgD}",
-                onClick = { }
-            )
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // New section for Order History and Orders icons
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                // Order History Icon
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.clickable {navController.navigate(Screen.OrderHistory.route)}
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.History,
-                        contentDescription = "Lịch sử đơn hàng",
-                        modifier = Modifier.size(50.dp)
-                    )
-                    Text(
-                        text = "Lịch sử đơn hàng",
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                }
-
                 // Orders Icon
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.clickable { navController.navigate(Screen.XemDonHang.route)}
+                    modifier = Modifier.clickable { navController.navigate(Screen.XemDonHang.route) }
                 ) {
                     Icon(
                         imageVector = Icons.Default.ShoppingBag,
@@ -183,7 +148,79 @@ fun ProfileScreen(navController: NavController) {
                     )
                 }
             }
+            Button(
+                onClick = { navController.navigate(Screen.LoginCustomer.route) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFE4B37C)
+                )
+            ) {
+                Text(
+                    text = "Đăng xuất",
+                    color = Color.Black
+                )
+            }
         }
+//        Column(
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .padding(paddingValues)
+//                .padding(16.dp),
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+//            // Profile Image
+//            Box(
+//                modifier = Modifier
+//                    .size(80.dp)
+//                    .clip(CircleShape)
+//                    .background(Color.LightGray)
+//            ) {
+//                Image(
+//                    painter = painterResource(id = R.drawable.logo),
+//                    contentDescription = "Profile Picture",
+//                    modifier = Modifier.fillMaxSize()
+//                )
+//            }
+//
+//            Spacer(modifier = Modifier.height(8.dp))
+//
+//            Text(
+//                "User Profile",
+//                style = MaterialTheme.typography.titleMedium,
+//                fontWeight = FontWeight.Bold
+//            )
+//
+//            Text(
+//                "Come and bring me :)",
+//                style = MaterialTheme.typography.bodyMedium,
+//                color = Color.Gray
+//            )
+//
+//            Spacer(modifier = Modifier.height(24.dp))
+//
+//            // Information Section
+//            ProfileSection(
+//                title = "Thông tin liên hệ",
+//                content = "${user?.Email}",
+//                onClick = { }
+//            )
+//
+//            ProfileSection(
+//                title = "Số điện thoại",
+//                content = "${user?.SDT}",
+//                onClick = { }
+//            )
+//
+//            ProfileSection(
+//                title = "Họ và tên",
+//                content = "${user?.TenNgD}",
+//                onClick = { }
+//            )
+
+
+        // New section for Order History and Orders icons
 
     }
 }

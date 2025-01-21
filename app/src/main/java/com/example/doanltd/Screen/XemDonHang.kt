@@ -145,8 +145,6 @@ private fun OrderItem(hoaDon: HoaDon, navController: NavController,viewModel: Sa
             Spacer(modifier = Modifier.height(8.dp))
 
             // Địa chỉ giao hàng
-            Text(text = "Địa chỉ: ${hoaDon.DiaChi}")
-
             Spacer(modifier = Modifier.height(8.dp))
 
             // Tổng tiền

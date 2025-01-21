@@ -3,8 +3,10 @@ package com.example.doanltd.Screen
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
@@ -29,6 +31,7 @@ data class Order(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OrderHistoryScreen(navController: NavController) {
+    val Orange = Color(0xFFE7A953)
     val orders = remember {
         mutableStateOf(
             listOf(
@@ -51,20 +54,16 @@ fun OrderHistoryScreen(navController: NavController) {
             )
         },
         floatingActionButton = {
-            ExtendedFloatingActionButton(
+            FloatingActionButton (
                 onClick = {
                     navController.navigate(Screen.Review.route.replace("{productId}", "default"))
                 },
-                containerColor = MaterialTheme.colorScheme.primary,
+                containerColor = Orange ,
                 contentColor = Color.White,
-                shape = RoundedCornerShape(50),
-                icon = {
-                    Icon(Icons.Default.Star, contentDescription = "Đánh giá")
-                },
-                text = {
-                    Text("Đánh giá")
-                }
-            )
+                shape = CircleShape
+            ){
+                Icon(Icons.Default.Star,contentDescription = null)
+            }
         }
     ) { paddingValues ->
         LazyColumn(

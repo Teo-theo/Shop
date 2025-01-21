@@ -87,36 +87,41 @@ fun HomeScreen(navController: NavController, viewModel: SanPhamViewModel = viewM
                 )
             },
             bottomBar = {
-                NavigationBar {
+                NavigationBar(
+                    containerColor = Orange
+                ) {
+                    NavigationBarItem(
+                        icon = { Icon(Icons.Default.ShoppingCart, contentDescription = "Cart") },
+                        label = { Text("Cart") },
+                        selected = false,
+                        onClick = {
+                            navController.navigate(Screen.Cart.route )
+                        }
+                    )
+                    NavigationBarItem(
+                        icon = { Icon(painter = painterResource(id=R.drawable.history),
+                            modifier = Modifier.size(30.dp), contentDescription = "History") },
+                        label = { Text("History") },
+                        selected = false,
+                        onClick = {
+                            navController.navigate(Screen.OrderHistory.route)
+                        }
+                    )
                     NavigationBarItem(
                         icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
                         label = { Text("Home") },
                         selected = true,
-                        onClick = { resetHome = true }
+                        onClick = {
+                            navController.navigate(Screen.Home.route)
+                        }
                     )
                     NavigationBarItem(
-                        icon = { Icon(Icons.Default.Email, contentDescription = "Tin Nhắn") },
-                        label = { Text("Tin nhắn") },
+                        icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
+                        label = { Text("Profile") },
                         selected = false,
-                        onClick = { navController.navigate(Screen.Message.route) }
-                    )
-                    NavigationBarItem(
-                        icon = { Icon(Icons.Default.ShoppingCart, contentDescription = "Giỏ Hàng") },
-                        label = { Text("Giỏ Hàng") },
-                        selected = false,
-                        onClick = { navController.navigate(Screen.Cart.route) }
-                    )
-                    NavigationBarItem(
-                        icon = { Icon(Icons.Default.Person, contentDescription = "Thông Tin") },
-                        label = { Text("Thông Tin") },
-                        selected = false,
-                        onClick = { navController.navigate(Screen.Profile.route) }
-                    )
-                    NavigationBarItem(
-                        icon = { Icon(Icons.Default.Settings, contentDescription = "Cài Đặt") },
-                        label = { Text("Cài Đặt") },
-                        selected = false,
-                        onClick = { navController.navigate(Screen.Setting.route) }
+                        onClick = {
+                            navController.navigate(Screen.Profile.route)
+                        }
                     )
                 }
             }

@@ -168,72 +168,13 @@ fun OrderDetailsScreen(navController: NavController,viewModel: SanPhamViewModel 
                     }
                 }
             }
-
-            // Payment Methods
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp)
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp)
-                ) {
-                    Text(
-                        "Hình thức thanh toán: khi nhận hàng",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                }
-            }
-
-            // Customer Note
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp)
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp)
-                ) {
-                    Text(
-                        "Địa chỉ :",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    TextField(
-                        value = customerNote,
-                        onValueChange = {
-                            customerNote = it
-                            showError = false
-                        },
-                        label = { Text("Nhập địa chỉ.......") },
-                        modifier = Modifier.fillMaxWidth(),
-                        isError = showError
-                    )
-                    if (showError) {
-                        Text(
-                            text = "Vui lòng nhập địa chỉ!",
-                            color = Color.Red,
-                            style = MaterialTheme.typography.bodySmall,
-                            modifier = Modifier.padding(top = 4.dp)
-                        )
-                    }
-                }
-            }
-
-            // Order Button
+          // Order Button
             Button(
                 onClick = {
                     CoroutineScope(Dispatchers.IO).launch {
-                        viewModel.themhoadon(user!!.MaNgD,totalAmount.value,customerNote)
+                        viewModel.themhoadon(user!!.MaNgD,totalAmount.value)
                     }
-                    if (customerNote.isBlank()) {
-                        // Hiển thị lỗi nếu địa chỉ chưa được nhập
-                        showError = true
-                    }
+
 
                 },
                 modifier = Modifier
