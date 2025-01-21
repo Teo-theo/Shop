@@ -11,7 +11,7 @@ data class CartItemEntity(
     val MaSp:String,
     val name: String,
     val price: Double,
-    val quantity: Int,
+    var quantity: Int,
     val SoLuongSP:Int,
     val imageUrl: String
 )

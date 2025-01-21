@@ -29,6 +29,7 @@ fun ReviewScreen(
     navController: NavController,
     productId: String?
 ) {
+    val Orange = Color(0xFFE7A953)
     var rating by remember { mutableStateOf(0) }
     var review by remember { mutableStateOf("") }
     Scaffold(
@@ -55,26 +56,6 @@ fun ReviewScreen(
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Product Image and Name
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.anh1),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(100.dp)
-                        .padding(end = 16.dp),
-                    contentScale = ContentScale.Crop
-                )
-                Text(
-                    text = "Bánh trang phơi sương.....",
-                    style = MaterialTheme.typography.titleMedium
-                )
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
 
             // Rating Stars
             Row(
@@ -84,7 +65,7 @@ fun ReviewScreen(
                 repeat(5) { index ->
                     IconButton(onClick = { rating = index + 1 }) {
                         Icon(
-                            imageVector = if (index < rating) Icons.Filled.Star else Icons.Outlined.Star,
+                            painter = painterResource(id = R.drawable.ratingcake),
                             contentDescription = "Star ${index + 1}",
                             tint = if (index < rating) Color(0xFFFFD700) else Color.Gray,
                             modifier = Modifier.size(32.dp)
@@ -93,57 +74,26 @@ fun ReviewScreen(
                 }
             }
 
-            Text(
-                "Đánh giá sản phẩm*",
-                modifier = Modifier.padding(vertical = 8.dp),
-                color = Color.Red
-            )
-
             // Review Text Field
             OutlinedTextField(
                 value = review,
+                colors =  OutlinedTextFieldDefaults.colors(Color.Gray),
+                shape = RoundedCornerShape(26.dp),
                 onValueChange = { review = it },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(120.dp),
                 placeholder = {
                     Text(
-                        "Bạn nghĩ như thế nào về kiểu dáng, độ vừa vặn, kích thước, màu sắc?",
-                        color = Color.Gray
+                        "Comment here",
+                        color = Color.Black
                     )
                 },
+
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Add Photo/Video Button
-            OutlinedButton(
-                onClick = { /* Handle photo/video upload */ },
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(4.dp),
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = Color.Gray
-                )
-            ) {
-                Icon(
-                    painter = painterResource(id = android.R.drawable.ic_menu_camera),
-                    contentDescription = "Add media",
-                    modifier = Modifier.size(24.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text("Thêm ảnh")
-            }
-
-            Text(
-                "0/300",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                textAlign = TextAlign.End,
-                color = Color.Gray
-            )
-
-            Spacer(modifier = Modifier.weight(1f))
 
             // Submit Button
             Button(
@@ -152,9 +102,9 @@ fun ReviewScreen(
                     .fillMaxWidth()
                     .height(48.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFFF11F1F)
+                    containerColor = Orange
                 ),
-                shape = RoundedCornerShape(4.dp)
+                shape = RoundedCornerShape(20.dp)
             ) {
                 Text("Gửi")
             }

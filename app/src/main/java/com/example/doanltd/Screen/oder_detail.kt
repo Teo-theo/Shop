@@ -40,6 +40,7 @@ fun OrderDetailsScreen(navController: NavController,viewModel: SanPhamViewModel 
     var showAddressDialog by remember { mutableStateOf(false) }
     var showResultDialog by remember { mutableStateOf<Pair<Boolean, String>?>(null) }
     var customerNote by remember { mutableStateOf("") }
+    val Orange = Color(0xFFE7A953)
 
     val context = LocalContext.current
     val db = remember { AppDatabase.getDatabase(context) }
@@ -127,61 +128,33 @@ fun OrderDetailsScreen(navController: NavController,viewModel: SanPhamViewModel 
                 Column(
                     modifier = Modifier.padding(16.dp)
                 ) {
-                    Text(
-                        "Tóm tắt đơn hàng",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text("Tiền sản phẩm:")
-                        Text("${totalAmount.value} VND")
-                    }
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text("Vận chuyển:")
-                        Text(
-                            "0đ",
-                            style = MaterialTheme.typography.bodySmall.copy(
-                                textDecoration = TextDecoration.LineThrough
-                            )
-                        )
-                    }
-                    Divider(modifier = Modifier.padding(vertical = 8.dp))
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text("Tổng:",
                             fontWeight = FontWeight.Bold,
-                            color = Color.Red
+                            color = Color.Black
                         )
                         Text("${totalAmount.value} VND",
                             fontWeight = FontWeight.Bold,
-                            color = Color.Red
+                            color = Color.Black
                         )
                     }
                 }
             }
-          // Order Button
             Button(
                 onClick = {
                     CoroutineScope(Dispatchers.IO).launch {
                         viewModel.themhoadon(user!!.MaNgD,totalAmount.value)
                     }
-
-
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 16.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Red
+                    containerColor = Orange
                 )
             ) {
                 Text("Đặt hàng")
