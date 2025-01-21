@@ -218,7 +218,7 @@ fun CartScreen(navController: NavHostController) {
                                 Icon(Icons.Default.Delete, contentDescription = "", tint = Color.Black)
                             }
                                 Button(
-                                    onClick = { if (cartItem.quantity > 0) cartItem.quantity-- },
+                                    onClick = { if (cartItem.quantity > 0) updateCartItem(cartItem, cartItem.quantity - 1) },
                                     colors = ButtonDefaults.buttonColors(containerColor = Orange)
                                 ) {
                                     Text("-")
@@ -228,7 +228,7 @@ fun CartScreen(navController: NavHostController) {
                                     modifier = Modifier.padding(horizontal = 8.dp)
                                 )
                                 Button(
-                                    onClick = { cartItem.quantity++ },
+                                    onClick = { updateCartItem(cartItem, cartItem.quantity + 1) },
                                     colors = ButtonDefaults.buttonColors(containerColor = Orange)
                                 ) {
                                     Text("+")
