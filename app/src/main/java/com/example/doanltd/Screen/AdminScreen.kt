@@ -1,6 +1,8 @@
 package com.example.doanltd.Screen
 
 import android.widget.Toast
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -44,6 +47,7 @@ import com.example.doanltd.data.HoaDon
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AdminScreen(navController: NavController, viewModel: SanPhamViewModel = viewModel()) {
+    val Orange = Color(0xFFE7A953)
     val hoaDons by remember { derivedStateOf { viewModel.hoadons } }
     var user by remember { mutableStateOf<NgDungEntity?>(null) }
     val context = LocalContext.current
@@ -52,6 +56,7 @@ fun AdminScreen(navController: NavController, viewModel: SanPhamViewModel = view
     var expanded by remember { mutableStateOf(false) }
     var selectedStatus by remember { mutableStateOf("Tất cả") }
     val statusList = listOf("Tất cả", "Đã đặt", "Đặt hàng thành công", "Đang giao","Đã giao","Đã hủy")
+
 
     LaunchedEffect(Unit) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -69,61 +74,73 @@ fun AdminScreen(navController: NavController, viewModel: SanPhamViewModel = view
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Admin") }
+                title = { Text("Admin") },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Orange
+                ),
             )
         },
-        bottomBar = {
-            NavigationBar {
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Adjust, contentDescription = "Home") },
-                    label = { Text("Đăng xuất") },
-                    selected = true,
-                    onClick = {
-                        navController.navigate(Screen.Login.route) {
-                            CoroutineScope(Dispatchers.IO).launch { user?.let { db.delete(it) } }
-                            popUpTo(Screen.Login.route) { inclusive = true }
-                        }
-                    }
-                )
-            }
-        }
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = it }) {
-                OutlinedTextField(
-                    value = selectedStatus,
-                    onValueChange = {},
-                    readOnly = true,
-                    label = { Text("Lọc theo trạng thái") },
-                    trailingIcon = {
-                        Icon(Icons.Default.ArrowDropDown, contentDescription = "Dropdown")
-                    },
-                    modifier = Modifier.menuAnchor()
-                )
-                ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-                    statusList.forEach { status ->
-                        DropdownMenuItem(
-                            text = { Text(status) },
-                            onClick = {
-                                selectedStatus = status
-                                expanded = false
-                            }
-                        )
+            Row(modifier = Modifier.fillMaxWidth().background(Color.White),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = it }) {
+                    OutlinedTextField(
+                        value = selectedStatus,
+                        onValueChange = {},
+                        readOnly = true,
+                        label = { Text("Lọc theo trạng thái",color = Color.Black) },
+                        trailingIcon = {
+                            Icon(Icons.Default.ArrowDropDown, contentDescription = "Dropdown")
+                        },
+                        modifier = Modifier.menuAnchor()
+                    )
+                    ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+                        statusList.forEach { status ->
+                            DropdownMenuItem(
+                                text = { Text(status) },
+                                onClick = {
+                                    selectedStatus = status
+                                    expanded = false
+                                }
+                            )
+                        }
                     }
                 }
+                Button(
+                    colors = ButtonDefaults.buttonColors(Color.LightGray),
+                    onClick = {
+                        navController.navigate(Screen.Login.route) {
+                            CoroutineScope(Dispatchers.IO).launch { user?.let { db.delete(it) } }
+                            popUpTo(Screen.Login.route) { inclusive = true }
+                        }
+                    }
+                ) { Text(text ="Đăng xuất", color = Color.Black) }
             }
             Spacer(modifier = Modifier.height(8.dp))
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().background(Color.LightGray)
             ) {
                 items(filteredHoaDons) { hoadon ->
                     OrderItemA(hoadon, navController, viewModel)
                 }
+            }
+            Box(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.cake),
+                    contentDescription = "",
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier.matchParentSize()
+                )
             }
         }
     }

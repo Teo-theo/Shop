@@ -135,7 +135,7 @@ private fun OrderItem(hoaDon: HoaDon, navController: NavController,viewModel: Sa
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            // Trạng thái đơn hàng
+
             Text(
                 text = "Trạng thái: ${hoaDon.TrangThai}",
                 color = Color(0xFFFF424F),
@@ -144,10 +144,7 @@ private fun OrderItem(hoaDon: HoaDon, navController: NavController,viewModel: Sa
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Địa chỉ giao hàng
-            Spacer(modifier = Modifier.height(8.dp))
 
-            // Tổng tiền
             Text(
                 text = "Tổng tiền: $formattedPrice",
                 style = MaterialTheme.typography.titleMedium,
@@ -156,7 +153,6 @@ private fun OrderItem(hoaDon: HoaDon, navController: NavController,viewModel: Sa
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Nút hủy đơn hàng (hiển thị nếu trạng thái là "Đã đặt" hoặc "Đặt hàng thành công")
             if (hoaDon.TrangThai == "Đã đặt" || hoaDon.TrangThai == "Đặt hàng thành công") {
                 Button(
                     onClick = { CoroutineScope(Dispatchers.IO).launch {
@@ -177,14 +173,13 @@ private fun OrderItem(hoaDon: HoaDon, navController: NavController,viewModel: Sa
         capnhaphoadonthanhcong?.let {
             if(it)
             {
-                // thành công
                 Toast.makeText( context,"$capnhaphoadonthongbao", Toast.LENGTH_SHORT).show()
-                //reaload
+
                 navController.navigate("xem_don_hang")
             }
             else
             {
-                //faild
+
                 Toast.makeText( context,"$capnhaphoadonthongbao", Toast.LENGTH_SHORT).show()
             }
         }

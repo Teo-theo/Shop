@@ -17,16 +17,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.doanltd.Screen.*
 import com.example.doanltd.Screen.CategoryScreen
-import com.example.doanltd.Screen.ChatScreen
 import com.example.doanltd.Screen.HomeScreen
 import com.example.doanltd.Screen.LoginScreen
-import com.example.doanltd.Screen.MessageScreen
 import com.example.doanltd.Screen.OrderHistoryScreen
 import com.example.doanltd.Screen.ProductDetailScreen
 import com.example.doanltd.Screen.ProfileScreen
-import com.example.doanltd.Screen.RegisterScreen
 import com.example.doanltd.Screen.ReviewScreen
-import com.example.doanltd.Screen.SettingScreen
 import com.google.gson.Gson
 import com.example.doanltd.AppDatabase
 import com.example.doanltd.RoomDatabase.NgDungRoom.NgDungEntity
@@ -108,23 +104,11 @@ fun AuthNavigation() {
         composable(Screen.LoginCustomer.route) {
             Customer_Login_Screen(navController = navController)
         }
-        composable(Screen.Register.route) {
-            RegisterScreen(navController = navController)
-        }
         composable(Screen.Home.route) {
             HomeScreen(navController = navController)
         }
         composable(Screen.Profile.route) {
             ProfileScreen(navController = navController)
-        }
-        composable(Screen.Message.route) {
-            MessageScreen(navController = navController)
-        }
-        composable(Screen.Chat.route) {
-            ChatScreen(navController = navController)
-        }
-        composable(Screen.Setting.route) {
-            SettingScreen(navController = navController)
         }
         composable(Screen.Cart.route) {
             CartScreen(navController = navController)

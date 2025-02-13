@@ -1,27 +1,18 @@
 package com.example.doanltd.Screen
 
-import NgDung
 import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,10 +21,6 @@ import com.example.doanltd.AppDatabase
 import com.example.doanltd.Navigation.Screen
 import com.example.doanltd.R
 import com.example.doanltd.View.AuthViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -64,7 +51,8 @@ fun Customer_Login_Screen(navController: NavController,viewModel: AuthViewModel=
             modifier = Modifier
                 .fillMaxSize()
                 .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+
         ) {
             Text(
                 modifier = Modifier.padding(bottom = 30.dp),
@@ -81,12 +69,14 @@ fun Customer_Login_Screen(navController: NavController,viewModel: AuthViewModel=
                 Button(
                     modifier = Modifier.padding(horizontal = 10.dp),
                     colors = ButtonDefaults.buttonColors(Color.LightGray),
-                    onClick = {},
+                    onClick = {
+                        navController.navigate("login")
+                    },
                 ) {
                     Text(text = "Quản lý", color = Color.Black)
                 }
                 Button(
-                    colors = ButtonDefaults.buttonColors(Color.Yellow),
+                    colors = ButtonDefaults.buttonColors(Orange),
                     onClick = {
                         navController.navigate("logincustomer")
                     }
@@ -130,12 +120,7 @@ fun Customer_Login_Screen(navController: NavController,viewModel: AuthViewModel=
                     verticalAlignment = Alignment.Bottom
                 ) {
                     Button(
-                        onClick = { /*CoroutineScope(Dispatchers.IO).launch {
-                    viewModel.dangNhapNguoiDung(
-                        tkNgD = TKNgD,
-                        matKhauNgD = MatKhauNgD
-                    )
-                }*/
+                        onClick = {
                             navController.navigate(Screen.Home.route)
                         },
                         modifier = Modifier
@@ -158,7 +143,6 @@ fun Customer_Login_Screen(navController: NavController,viewModel: AuthViewModel=
             }
         }
     }
-    // ⬇️ Đặt LaunchedEffect bên ngoài Column ⬇️
     LaunchedEffect(dangNhapThanhCong) {
         dangNhapThanhCong?.let {
             if (it) {

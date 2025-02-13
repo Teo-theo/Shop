@@ -80,7 +80,7 @@ fun LoginScreen(navController: NavController,viewModel: AuthViewModel= androidx.
         ) {
             Button(
                 modifier = Modifier.padding(horizontal = 10.dp),
-                colors = ButtonDefaults.buttonColors(Color.Yellow),
+                colors = ButtonDefaults.buttonColors(Orange),
                 onClick = {
                     navController.navigate("login")
                 },
@@ -132,12 +132,7 @@ fun LoginScreen(navController: NavController,viewModel: AuthViewModel= androidx.
                 verticalAlignment = Alignment.Bottom
             ) {
                 Button(
-                    onClick = { /*CoroutineScope(Dispatchers.IO).launch {
-                    viewModel.dangNhapNguoiDung(
-                        tkNgD = TKNgD,
-                        matKhauNgD = MatKhauNgD
-                    )
-                }*/
+                    onClick = {
                         navController.navigate(Screen.Admin.route)
                     },
                     modifier = Modifier

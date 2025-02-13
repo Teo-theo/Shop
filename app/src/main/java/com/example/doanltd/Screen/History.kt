@@ -41,9 +41,7 @@ fun OrderHistoryScreen(navController: NavController) {
     val orders = remember {
         mutableStateOf(
             listOf(
-                Order("HD001", "Hoàn thành", 180000, "27/11/2019 11:52", "01/12/2019 11:06"),
-                Order("HD002", "Đang giao dịch", 180000, "24/11/2019 19:14", "24/11/2019 19:14"),
-                Order("HD002", "Đang giao dịch", 180000, "23/11/2019 14:59", "23/11/2019 14:59")
+                Order("HD001", "Hoàn thành", 80000, "01/21/2019 11:52", "01/21/2019 11:06"),
             )
         )
     }
@@ -127,63 +125,10 @@ fun OrderHistoryScreen(navController: NavController) {
     }
 }
 
-//@Composable
-//fun OrderTableHeader() {
-//    Row(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(vertical = 8.dp),
-//        horizontalArrangement = Arrangement.SpaceBetween
-//    ) {
-//        Text(
-//            "Mã đơn hàng",
-//            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold, fontSize = 14.sp),
-//            modifier = Modifier.weight(1f)
-//        )
-//        Text(
-//            "Trạng thái",
-//            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold, fontSize = 14.sp),
-//            modifier = Modifier.weight(1f)
-//        )
-//        Text(
-//            "Thanh toán",
-//            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold, fontSize = 14.sp),
-//            modifier = Modifier.weight(1f)
-//        )
-//        Text(
-//            "Ngày ghi nhận",
-//            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold, fontSize = 14.sp),
-//            modifier = Modifier.weight(1.5f)
-//        )
-//        Text(
-//            "Cập nhật cuối",
-//            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold, fontSize = 14.sp),
-//            modifier = Modifier.weight(1.5f)
-//        )
-//    }
-//}
+
 
 @Composable
 fun OrderRow(order: Order) {
-//    Row(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(vertical = 8.dp),
-//        horizontalArrangement = Arrangement.SpaceBetween,
-//        verticalAlignment = Alignment.CenterVertically
-//    ) {
-//        Text(order.orderId, style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
-//        Text(
-//            order.status,
-//            style = MaterialTheme.typography.bodySmall.copy(
-//                color = if (order.status == "Hoàn thành") Color.Green else Color.Blue
-//            ),
-//            modifier = Modifier.weight(1f)
-//        )
-//        Text("${order.value}₫", style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
-//        Text(order.dateRecorded, style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1.5f))
-//        Text(order.lastUpdate, style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1.5f))
-//    }
     Card(
         modifier = Modifier
             .fillMaxWidth()

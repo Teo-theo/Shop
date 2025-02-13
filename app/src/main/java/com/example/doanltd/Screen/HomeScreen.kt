@@ -69,72 +69,69 @@ fun HomeScreen(navController: NavController, viewModel: SanPhamViewModel = viewM
                 normalize(it.MoTa).contains(normalize(searchQuery))
     }
 
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = Orange
-                    ),
-                    title = {
-                        Column {
-                            Text("GIGACHADCAFE")
-                            Text(
-                                "Chao buoi sang, Phuong Vo",
-                                fontSize = 14.sp
-                            )
-                        }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Orange
+                ),
+                title = {
+                    Column {
+                        Text("GIGACHADCAFE")
+                        Text(
+                            "Chao buoi sang, Phuong Vo",
+                            fontSize = 14.sp
+                        )
+                    }
+                }
+            )
+        },
+        bottomBar = {
+            NavigationBar(
+                containerColor = Orange
+            ) {
+                NavigationBarItem(
+                    icon = { Icon(Icons.Default.ShoppingCart, contentDescription = "Cart") },
+                    label = { Text("Cart") },
+                    selected = false,
+                    onClick = {
+                        navController.navigate(Screen.Cart.route )
                     }
                 )
-            },
-            bottomBar = {
-                NavigationBar(
-                    containerColor = Orange
-                ) {
-                    NavigationBarItem(
-                        icon = { Icon(Icons.Default.ShoppingCart, contentDescription = "Cart") },
-                        label = { Text("Cart") },
-                        selected = false,
-                        onClick = {
-                            navController.navigate(Screen.Cart.route )
-                        }
-                    )
-                    NavigationBarItem(
-                        icon = { Icon(painter = painterResource(id=R.drawable.history),
-                            modifier = Modifier.size(30.dp), contentDescription = "History") },
-                        label = { Text("History") },
-                        selected = false,
-                        onClick = {
-                            navController.navigate(Screen.OrderHistory.route)
-                        }
-                    )
-                    NavigationBarItem(
-                        icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
-                        label = { Text("Home") },
-                        selected = true,
-                        onClick = {
-                            navController.navigate(Screen.Home.route)
-                        }
-                    )
-                    NavigationBarItem(
-                        icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-                        label = { Text("Profile") },
-                        selected = false,
-                        onClick = {
-                            navController.navigate(Screen.Profile.route)
-                        }
-                    )
-                }
+                NavigationBarItem(
+                    icon = { Icon(painter = painterResource(id=R.drawable.history),
+                        modifier = Modifier.size(30.dp), contentDescription = "History") },
+                    label = { Text("History") },
+                    selected = false,
+                    onClick = {
+                        navController.navigate(Screen.OrderHistory.route)
+                    }
+                )
+                NavigationBarItem(
+                    icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
+                    label = { Text("Home") },
+                    selected = true,
+                    onClick = {
+                        navController.navigate(Screen.Home.route)
+                    }
+                )
+                NavigationBarItem(
+                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
+                    label = { Text("Profile") },
+                    selected = false,
+                    onClick = {
+                        navController.navigate(Screen.Profile.route)
+                    }
+                )
             }
-        ) { paddingValues ->
+        }
+    ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(16.dp)
         ) {
-
-
-
             // Search Bar
             Row(
                 modifier = Modifier
@@ -237,45 +234,6 @@ fun CategoryItem(loaiSP: LoaiSP, navController: NavController) {
 @Composable
 fun SanPhamItem(sanPham: SanPham, navController: NavController) {
     val formattedPrice = NumberFormat.getInstance(Locale("vi", "VN")).format(sanPham.DonGia)
-
-//    Card(
-//        modifier = Modifier.fillMaxWidth().padding(15.dp),
-//        shape = RoundedCornerShape(12.dp),
-//        onClick = { navController.navigate("${Screen.ProductDetail.route}/${sanPham.MaSp}") }
-//    ) {
-//        Row(
-//            modifier = Modifier
-//                .padding(8.dp)
-//                .fillMaxWidth(),
-//            horizontalArrangement = Arrangement.SpaceBetween,
-//            verticalAlignment = Alignment.CenterVertically
-//        ){
-//            AsyncImage(
-//                modifier = Modifier.size(40.dp),
-//                model = sanPham.HinhSp,
-//                contentDescription = null
-//            )
-//        }
-//        Column(modifier = Modifier.padding(8.dp)) {
-//            Text(
-//                text = sanPham.TenSp,
-//                style = MaterialTheme.typography.titleSmall,
-//                fontWeight = FontWeight.Bold,
-//                modifier = Modifier.padding(vertical = 4.dp)
-//            )
-//            Text(
-//                text = "${sanPham.MoTa} Thơm ngon khó cưỡng",
-//                style = MaterialTheme.typography.bodySmall,
-//                color = Color.Gray,
-//                modifier = Modifier.padding(vertical = 4.dp)
-//            )
-//            Text(
-//                text = "$formattedPrice VND",
-//                style = MaterialTheme.typography.titleMedium,
-//                fontWeight = FontWeight.Bold
-//            )
-//        }
-//    }
     Card(
         modifier = Modifier
             .fillMaxWidth()

@@ -1,6 +1,5 @@
 package com.example.doanltd.Screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -163,65 +162,6 @@ fun ProfileScreen(navController: NavController) {
                 )
             }
         }
-//        Column(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(paddingValues)
-//                .padding(16.dp),
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
-//            // Profile Image
-//            Box(
-//                modifier = Modifier
-//                    .size(80.dp)
-//                    .clip(CircleShape)
-//                    .background(Color.LightGray)
-//            ) {
-//                Image(
-//                    painter = painterResource(id = R.drawable.logo),
-//                    contentDescription = "Profile Picture",
-//                    modifier = Modifier.fillMaxSize()
-//                )
-//            }
-//
-//            Spacer(modifier = Modifier.height(8.dp))
-//
-//            Text(
-//                "User Profile",
-//                style = MaterialTheme.typography.titleMedium,
-//                fontWeight = FontWeight.Bold
-//            )
-//
-//            Text(
-//                "Come and bring me :)",
-//                style = MaterialTheme.typography.bodyMedium,
-//                color = Color.Gray
-//            )
-//
-//            Spacer(modifier = Modifier.height(24.dp))
-//
-//            // Information Section
-//            ProfileSection(
-//                title = "Thông tin liên hệ",
-//                content = "${user?.Email}",
-//                onClick = { }
-//            )
-//
-//            ProfileSection(
-//                title = "Số điện thoại",
-//                content = "${user?.SDT}",
-//                onClick = { }
-//            )
-//
-//            ProfileSection(
-//                title = "Họ và tên",
-//                content = "${user?.TenNgD}",
-//                onClick = { }
-//            )
-
-
-        // New section for Order History and Orders icons
-
     }
 }
 
